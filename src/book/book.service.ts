@@ -19,4 +19,20 @@ export class BookService {
     const newBook = await this.bookModel.create(book);
     return newBook;
   }
+
+  async findById(id: string): Promise<Book> {
+    const findBook = await this.bookModel.findById(id);
+    return findBook;
+  }
+
+  async updateById(id: string, book: Book): Promise<Book> {
+    return await this.bookModel.findByIdAndUpdate(id, book, {
+      new: true,
+      runValidators: true,
+    });
+  }
+
+  async deleteById(id: string): Promise<Book> {
+    return await this.bookModel.findByIdAndDelete(id);
+  }
 }
